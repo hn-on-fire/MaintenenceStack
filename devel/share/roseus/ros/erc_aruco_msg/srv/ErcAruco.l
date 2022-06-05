@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/erc_aruco_msg/share/roseus/ros/erc_aruco_msg/srv/ErcAruco.l

@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_slam/include/fiducial_slam/AddFiducialRequest.h

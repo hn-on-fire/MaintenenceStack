@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_slam/share/gennodejs/ros/fiducial_slam/srv/_index.js

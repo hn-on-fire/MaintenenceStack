@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/erc_aruco_checker/share/erc_aruco_checker/cmake/erc_aruco_checkerConfig.cmake

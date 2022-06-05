@@ -1,2 +1,0 @@
-packages/fiducials
-/home/blank/european_rover_challenge/maintenence/devel/.private/fiducials/cmake.lock /home/blank/european_rover_challenge/maintenence/devel/./cmake.lock

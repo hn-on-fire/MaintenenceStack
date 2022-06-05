@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/erc_aruco_msg/lib/python3/dist-packages/erc_aruco_msg/srv/__init__.py

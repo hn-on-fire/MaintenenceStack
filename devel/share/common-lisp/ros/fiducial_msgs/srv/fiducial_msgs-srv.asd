@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_msgs/share/common-lisp/ros/fiducial_msgs/srv/fiducial_msgs-srv.asd

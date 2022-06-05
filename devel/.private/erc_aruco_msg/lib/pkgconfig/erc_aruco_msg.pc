@@ -1,8 +1,0 @@
-prefix=/home/blank/european_rover_challenge/maintenence/devel/.private/erc_aruco_msg
-
-Name: erc_aruco_msg
-Description: Description of erc_aruco_msg
-Version: 0.0.0
-Cflags: -I/home/blank/european_rover_challenge/maintenence/devel/.private/erc_aruco_msg/include
-Libs: -L${prefix}/lib 
-Requires: 

@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/marsrovermanipal_td2/lib/pkgconfig/marsrovermanipal_td2.pc

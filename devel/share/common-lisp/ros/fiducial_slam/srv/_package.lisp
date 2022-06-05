@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_slam/share/common-lisp/ros/fiducial_slam/srv/_package.lisp

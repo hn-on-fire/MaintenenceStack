@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/vision_msgs/share/roseus/ros/vision_msgs/msg/BoundingBox3DArray.l

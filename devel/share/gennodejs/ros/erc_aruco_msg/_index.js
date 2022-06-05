@@ -1,1 +1,0 @@
-/home/blank/european_rover_challenge/maintenence/devel/.private/erc_aruco_msg/share/gennodejs/ros/erc_aruco_msg/_index.js
