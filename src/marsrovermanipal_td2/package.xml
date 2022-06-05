@@ -51,7 +51,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>fiducial_msgs</build_depend>
   <build_depend>erc_aruco_msg</build_depend>
-  <build_depend>fiucials</build_depend>
+  <build_depend>fiducials</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
