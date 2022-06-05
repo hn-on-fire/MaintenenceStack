@@ -18,7 +18,6 @@ COPY src ./src
 RUN apt-get update \
   && rosdep update \
   && rosdep install --from-paths src -iy \
-  && apt-get install ros-noetic-catkin python-catkin-tools \
   && rm -rf /var/lib/apt/lists/* 
 
 RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd /catkin_ws; catkin_make'
