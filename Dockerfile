@@ -18,11 +18,12 @@ COPY src ./src
 RUN apt-get update \
   && rosdep update \
   && rosdep install --from-paths src -iy \
-  && apt-get install ros-kinetic-catkin python-catkin-tools \
+  && apt-get install ros-noetic-catkin python-catkin-tools \
   && rm -rf /var/lib/apt/lists/* 
 
-RUN catkin config --extend /opt/ros/noetic && catkin build --no-status
+RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd /catkin_ws; catkin_make'
 
 # Automatically source the workspace when starting a bash session
+
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 RUN echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
