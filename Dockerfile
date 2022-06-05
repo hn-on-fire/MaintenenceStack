@@ -18,6 +18,7 @@ COPY src ./src
 RUN apt-get update \
   && rosdep update \
   && rosdep install --from-paths src -iy \
+  && apt-get install ros-kinetic-catkin python-catkin-tools \
   && rm -rf /var/lib/apt/lists/* 
 
 RUN catkin config --extend /opt/ros/noetic && catkin build --no-status
