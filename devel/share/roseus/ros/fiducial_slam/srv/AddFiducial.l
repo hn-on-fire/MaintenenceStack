@@ -1,0 +1,1 @@
+/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_slam/share/roseus/ros/fiducial_slam/srv/AddFiducial.l

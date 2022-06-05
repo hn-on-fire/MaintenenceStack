@@ -1,0 +1,1 @@
+/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_msgs/share/gennodejs/ros/fiducial_msgs/msg/FiducialArray.js

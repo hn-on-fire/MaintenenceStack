@@ -1,0 +1,6 @@
+devel_space: /home/blank/european_rover_challenge/maintenence/devel
+install: false
+install_space: /home/blank/european_rover_challenge/maintenence/install
+profile: default
+source_space: /home/blank/european_rover_challenge/maintenence/src
+workspace: /home/blank/european_rover_challenge/maintenence

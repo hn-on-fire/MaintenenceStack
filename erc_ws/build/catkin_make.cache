@@ -1,2 +1,0 @@
-erc_aruco_msg:fiducials/aruco_detect:fiducials/fiducial_msgs:fiducials/fiducial_slam:fiducials/fiducials:marsrovermanipal_td2
--DCATKIN_DEVEL_PREFIX=/home/hn-on-fire/MRM_ERC/erc_ws/devel -DCMAKE_INSTALL_PREFIX=/home/hn-on-fire/MRM_ERC/erc_ws/install -G Unix Makefiles

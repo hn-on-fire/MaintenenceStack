@@ -1,0 +1,1 @@
+/home/blank/european_rover_challenge/maintenence/devel/.private/aruco_detect/include/aruco_detect/DetectorParamsConfig.h

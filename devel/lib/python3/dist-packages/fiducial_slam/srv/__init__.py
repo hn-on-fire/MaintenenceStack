@@ -1,0 +1,1 @@
+/home/blank/european_rover_challenge/maintenence/devel/.private/fiducial_slam/lib/python3/dist-packages/fiducial_slam/srv/__init__.py
