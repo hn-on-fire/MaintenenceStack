@@ -50,7 +50,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>fiducial_msgs</build_depend>
-  <build_depend>erc_arco_msg</build_depend>
+  <build_depend>erc_aruco_msg</build_depend>
   <build_depend>fiucials</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>roscpp</build_depend>
@@ -63,7 +63,7 @@
   <build_export_depend>std_msgs</build_export_depend>
   <exec_depend>fiducial_msgs</exec_depend>
   <exec_depend>fiducials</exec_depend>
-  <exec_depend>erc_arco_msg</exec_depend>
+  <exec_depend>erc_aruco_msg</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
