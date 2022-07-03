@@ -69,7 +69,7 @@ def main():
     plan = arm_group.go(wait=True)
 
     # grab the IMU by closing the gripper
-    #gripperPos("semi_open")
+    gripperPos("semi_open")
     rospy.sleep(2)
 
     # bring IMU near the panel 5cm above the velcro
@@ -92,7 +92,7 @@ def main():
     arm_group.execute(plan)
     
     #release the IMU
-    #gripperPos("open")
+    gripperPos("open")
     rospy.sleep(2)
 
     #return to home position
@@ -107,7 +107,6 @@ def main():
     plan = arm_group.go(wait=True)
 
     rospy.sleep(1)
-    moveit_commander.roscpp_shutdown()
 
 
 if __name__ == "__main__":

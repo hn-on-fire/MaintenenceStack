@@ -7,7 +7,7 @@ from shutil import move
 import sys
 from math import cos, pi, radians, sin
 from re import I, M
-
+from gripperControl import *
 import geometry_msgs.msg
 import moveit_commander
 import moveit_msgs.msg
@@ -374,17 +374,17 @@ def main():
     try:
         goToUp()
         lid_original_position = PickLid(Inspec_panel_qua)
-        # GripperState("semi_close")
+        gripperPos("semi_close")
         lid_Store_position = StoreLid(Inspec_lid_storage)
-        # GripperState("open")
+        gripperPos("open")
         GoToScan(Inspec_panel)
 
         # # here will be scan and press the button code
 
         GoToLid(lid_Store_position)
-        # GripperState("semi_close")
+        gripperPos("semi_close")
         PlaceLid(Inspec_panel_qua)
-        # GripperState("open")
+        gripperPos("open")
 
         # check()
     except rospy.ROSInterruptException:

@@ -215,6 +215,37 @@ def PickLid(box, move_group):
 
     return (wpose.position.x, wpose.position, wpose.position.z)
 
+def PickLid_Backup1(box, move_group):    
+    
+    aboveStorage = [radians(155), radians(-87), radians(-81), radians(-68), radians(92), radians(88)]
+    move_group.go(aboveStorage)
+    
+    waypoints = []
+    end = move_group.get_end_effector_link()
+    wpose = move_group.get_current_pose(end).pose
+    # print(wpose)
+    
+    # qua = euler_to_quaternion(rpy_d[0],rpy_d[1],rpy_d[2])
+    # print(qua)
+    wpose.position.x = box[0] +0.01
+    wpose.position.y = box[1] -0.0032
+    wpose.position.z = box[2] +0.125
+    # wpose.orientation.x = qua[0]
+    # wpose.orientation.y = qua[1]
+    # wpose.orientation.z = qua[2]
+    # wpose.orientation.w = qua[3]
+
+    waypoints.append(copy.deepcopy(wpose))
+    (plan, fraction) = move_group.compute_cartesian_path(waypoints, 0.01, 0.0,True)
+    move_group.execute(plan, wait=True)
+    print("Reached Lid Potition")
+    wpose = move_group.get_current_pose(end).pose
+    print(wpose) 
+    print("")  
+    
+    return (wpose.position.x,wpose.position,wpose.position.z)
+    
+    
 
 def StoreLid(lidStorage, move_group):
 
