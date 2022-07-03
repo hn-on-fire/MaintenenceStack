@@ -12,10 +12,12 @@ from arucoPos import *
 from pressButton import *
 
 up = [0,-(pi/2), 0, -(pi/2), 0, 0]
-imu = [radians(91), radians(-128), radians(115), radians(-97), radians(-116), radians(117)]
-imuBoard = [radians(78), radians(-98), radians(61), radians(23), radians(147), radians(-105)]
-buttonsBox = [radians(93), radians(13), radians(-89), radians(-104), radians(144), radians(90)]
-storageArea = [radians(98), radians(-45), radians(-106), radians(-101), radians(110), radians(44)]
+imu = [radians(-131.15), radians(-131), radians(45), radians(-157), radians(116), radians(52)]
+imuBoard = [radians(-20), radians(-147), radians(119), radians(-147), radians(-52), radians(82)]
+buttons1 = [radians(64), radians(-156), radians(109), radians(-132), radians(-157), radians(86)]
+buttonsBox = [radians(73), radians(-148), radians(81), radians(-52), radians(-157), radians(143)]
+
+storageArea = [radians(-50), radians(-131), radians(55), radians(-51), radians(-114), radians(91)]
 
 group_name = "manipulator"
 moveit_commander.roscpp_initialize(sys.argv)
@@ -27,11 +29,9 @@ def scan():
     rospy.set_param('start', move_group.get_current_joint_values())
     move_group.go(up)
     move_group.go(imu)
-    move_group.go(up)
     move_group.go(imuBoard)
-    move_group.go(up)
+    move_group.go(buttons1)
     move_group.go(buttonsBox)
-    move_group.go(up)
     move_group.go(storageArea)
 
 def nodeKiller(toKill, aruco):
