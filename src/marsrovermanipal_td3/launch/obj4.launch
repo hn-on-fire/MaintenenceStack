@@ -1,6 +1,6 @@
 <launch>
 <arg name="angle" default="45"/>
 <node pkg="marsrovermanipal_td3" name="placeIMU" type="placeIMU.py" output="screen" respawn="false">
-    <param name="tags" value="$(arg tags)"/>
+<param name="angle" value="$(arg angle)"/>
 </node>
 </launch>
