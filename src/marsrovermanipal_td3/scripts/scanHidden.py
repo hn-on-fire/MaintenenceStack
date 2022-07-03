@@ -43,7 +43,7 @@ robot = moveit_commander.RobotCommander()
 display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
 # arucoID = 12
 Inspec_panel = rospy.get_param('tag12')[0]#[0.33565261545991887, -0.2745230369010141, 0.2059755184403631]
-GoToScan(Inspec_panel)
+GoToScan(Inspec_panel, move_group)
 
 rospy.Subscriber('fiducial_transforms', FiducialTransformArray, callback)
 while flag:
