@@ -36,7 +36,7 @@ def scan():
 
 def nodeKiller(toKill, aruco):
     while True:
-        if len(aruco.aruco>=9):
+        if len(aruco.aruco)>=14:
             sleep(1)
             os.system("rosnode kill aruco_detect")
             rospy.wait_for_service("erc_aruco_score")
