@@ -36,9 +36,25 @@ def scan():
 
 def nodeKiller(toKill, aruco):
     while True:
-        if len(aruco.aruco)>=14:
+        if len(aruco.aruco)>=13:
             sleep(1)
             os.system("rosnode kill aruco_detect")
+            rospy.set_param('/tag1', [aruco.aruco[1][0],aruco.aruco[1][1]])
+            rospy.set_param('/tag2', [aruco.aruco[2][0],aruco.aruco[2][1]])
+            rospy.set_param('/tag3', [aruco.aruco[3][0],aruco.aruco[3][1]])
+            rospy.set_param('/tag4', [aruco.aruco[4][0],aruco.aruco[4][1]])
+            rospy.set_param('/tag5', [aruco.aruco[5][0],aruco.aruco[5][1]])
+            rospy.set_param('/tag6', [aruco.aruco[6][0],aruco.aruco[6][1]])
+            rospy.set_param('/tag7', [aruco.aruco[7][0],aruco.aruco[7][1]])
+            rospy.set_param('/tag8', [aruco.aruco[8][0],aruco.aruco[8][1]])
+            rospy.set_param('/tag9', [aruco.aruco[9][0],aruco.aruco[9][1]])
+            rospy.set_param('/tag10', [aruco.aruco[10][0],aruco.aruco[10][1]])
+            rospy.set_param('/tag11', [aruco.aruco[11][0],aruco.aruco[11][1]])
+            rospy.set_param('/tag12', [aruco.aruco[12][0],aruco.aruco[12][1]])
+            rospy.set_param('/tag13', [aruco.aruco[13][0],aruco.aruco[13][1]])
+            rospy.set_param('/tag14', [aruco.aruco[14][0],aruco.aruco[14][1]])
+
+            print(rospy.get_param_names())
             rospy.wait_for_service("erc_aruco_score")
             try:
                 service_proxy = rospy.ServiceProxy('erc_aruco_score',ErcAruco)
@@ -56,13 +72,13 @@ def nodeKiller(toKill, aruco):
                 rospy.set_param('/tag4', [aruco.aruco[4][0],aruco.aruco[4][1]])
                 service_msg.tag5= aruco.aruco[5][0]
                 rospy.set_param('/tag5', [aruco.aruco[5][0],aruco.aruco[5][1]])
-                service_msg.tag6= aruco.aruco[6][0]
+                service_msg.tag6== aruco.aruco[6][0]
                 rospy.set_param('/tag6', [aruco.aruco[6][0],aruco.aruco[6][1]])
-                service_msg.tag7=aruco.aruco[7][0]
+                service_msg.tag7== aruco.aruco[7][0]
                 rospy.set_param('/tag7', [aruco.aruco[7][0],aruco.aruco[7][1]])
-                service_msg.tag8=aruco.aruco[8][0]
+                service_msg.tag8== aruco.aruco[8][0]
                 rospy.set_param('/tag8', [aruco.aruco[8][0],aruco.aruco[8][1]])
-                service_msg.tag9=aruco.aruco[9][0]
+                service_msg.tag9== aruco.aruco[9][0]
                 rospy.set_param('/tag9', [aruco.aruco[9][0],aruco.aruco[9][1]])
                 service_msg.tag10=aruco.aruco[10][0]
                 rospy.set_param('/tag10', [aruco.aruco[10][0],aruco.aruco[10][1]])
@@ -83,6 +99,7 @@ def nodeKiller(toKill, aruco):
                 print(f"Service call failed: {e}")
             sleep(1)
             move_group.go(up)
+            print(rospy.get_param_names)
             os.system("rosnode kill arucoScanner")
 
 aruco = arucoPos()

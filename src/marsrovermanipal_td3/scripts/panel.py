@@ -133,7 +133,7 @@ def PickLid(box, move_group):
            radians(-90), radians(96), radians(92)]
     move_group.go(mid)
 
-    setConstrains()
+    setConstrains(move_group)
 
 
 
@@ -177,7 +177,7 @@ def PickLid(box, move_group):
             radians(-90), radians(96), radians(92)]
         move_group.go(mid)
         
-        setConstrains()
+        setConstrains(move_group)
         
         midPoint = [0.07, -0.14, 0.22,  pi, 0.6, eular[2] - radians(90)]
         move_group.set_pose_target(midPoint)

@@ -18,7 +18,7 @@ from tf.transformations import euler_from_quaternion
 from moveit_commander.conversions import pose_to_list
 from moveit_msgs.msg import MoveGroupActionResult
 
-IMU_orientation = float(rospy.get_param('~angle'))
+IMU_orientation = float(rospy.get_param('angle'))
 Panel = rospy.get_param("tag11")[0]
 
 moveit_commander.roscpp_initialize(sys.argv)
