@@ -25,7 +25,7 @@ import os
 
 flag = True
 def callback(data): 
-    if len(data.tranforms)>0:
+    if len(data.transforms)>0:
         for i in range(len(data.transforms)):
             frame = data.transforms[i]
             if frame.fiducial_id > 0 and frame.fiducial_id<10:
