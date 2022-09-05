@@ -133,7 +133,7 @@ def PickLid(box,move_group):
     print(lid_position)
     print("")
 
-    return (wpose.position.x, wpose.position.y, wpose.position.z)
+    return [wpose.position.x, wpose.position.y, wpose.position.z]
 
 
 def StoreLid(lidStorage,move_group):
