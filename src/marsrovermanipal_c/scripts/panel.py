@@ -151,8 +151,8 @@ def StoreLid(lidStorage,move_group):
     print("up")
 
     waypoints = []
-    wpose.position.x = flost(lidStorage[0]) - 0.068
-    wpose.position.y = flost(lidStorage[1]) - 0.065
+    wpose.position.x = float(lidStorage[0]) - 0.068
+    wpose.position.y = float(lidStorage[1]) - 0.065
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
