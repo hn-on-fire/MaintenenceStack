@@ -39,7 +39,7 @@ display_trajectory_publisher = rospy.Publisher(
 #Panel = [0.41428, 0.346645, 0.51533,-0.56227, 0.40892, 0.42225, -0.58168]
 
 IMU_orientation = float(rospy.get_param('angle'))
-Panel = rospy.get_param("tag11")[0]
+Panel = rospy.get_param("tag11")
 
 
 def euler_to_quaternion(roll, pitch, yaw):
@@ -85,7 +85,7 @@ def PlaceImu(Panel, move_group):
     end = move_group.get_end_effector_link()
     wpose = move_group.get_current_pose(end).pose
 
-    eular = quaternion_to_euler(Panel[3], Panel[4], Panel[5], Panel[6])
+    eular = quaternion_to_euler(Panel[1][0], Panel[1][1], Panel[1][2], Panel[1][3])
     eular = list(eular)
     print(degrees(eular[0]), degrees(eular[1]), degrees(eular[2]))
     eular[0] = pi/2
@@ -95,9 +95,9 @@ def PlaceImu(Panel, move_group):
     qua = euler_to_quaternion(eular[0], eular[1], eular[2])
     print(qua)
 
-    wpose.position.x = Panel[0]-0.08520
-    wpose.position.y = Panel[1]-0.09954
-    wpose.position.z = Panel[2]-0.15
+    wpose.position.x = Panel[0][0]-0.08520
+    wpose.position.y = Panel[0][1]-0.09954
+    wpose.position.z = Panel[0][2]-0.15
     wpose.orientation.x = qua[0]
     wpose.orientation.y = qua[1]
     wpose.orientation.z = qua[2]
@@ -137,8 +137,8 @@ def PlaceImu(Panel, move_group):
     waypoints = []
     end = move_group.get_end_effector_link()
     wpose = move_group.get_current_pose(end).pose
-    wpose.position.x += Panel[0] + 0.056 - 0.01332 -0.43
-    wpose.position.y += Panel[1] - 0.042 - 0.00433 -0.3
+    wpose.position.x += Panel[0][0] + 0.056 - 0.01332 -0.43
+    wpose.position.y += Panel[0][1] - 0.042 - 0.00433 -0.3
     waypoints.append(copy.deepcopy(wpose))
     print(wpose)
     (plan, fraction) = move_group.compute_cartesian_path(
