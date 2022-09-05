@@ -229,8 +229,9 @@ def PlaceLid(lid_position,move_group):
 
     waypoints = []
     wpose = move_group.get_current_pose().pose
-    wpose.position.x = lid_position[0][0]
-    wpose.position.y = lid_position[0][1]
+    wpose.position.x = box[0][0] + 0.01
+    wpose.position.y = box[0][1] - 0.0032
+
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
