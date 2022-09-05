@@ -161,7 +161,7 @@ def StoreLid(lidStorage,move_group):
     print("back")
 
     waypoints = []
-    wpose.position.z = lidStorage[2] + 0.1
+    wpose.position.z = lidStorage[0][2] + 0.1
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
@@ -177,7 +177,6 @@ def StoreLid(lidStorage,move_group):
     print("")
 
     return lid_position
-
 
 
 def GoToScan(box,move_group):
