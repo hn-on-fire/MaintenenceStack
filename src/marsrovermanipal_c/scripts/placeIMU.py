@@ -113,7 +113,7 @@ def PlaceImu(Panel, move_group):
     end = move_group.get_end_effector_link()
     wpose = move_group.get_current_pose(end).pose
 
-    eular = quaternion_to_euler(Panel[3], Panel[4], Panel[5], Panel[6])
+    eular = quaternion_to_euler(Panel[1][0], Panel[1][1], Panel[1][2], Panel[1][3])
     eular = list(eular)
     print(degrees(eular[0]), degrees(eular[1]), degrees(eular[2]))
     eular[0] = pi/2
