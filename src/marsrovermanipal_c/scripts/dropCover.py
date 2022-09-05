@@ -16,4 +16,4 @@ display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path
 
 gripperPos("open")
 rospy.sleep(4)
-GoToScan(rospy.get_param('tag12')[0], move_group)
+GoToScan(rospy.get_param('tag12'), move_group)
