@@ -10,7 +10,6 @@ from gripperControl import *
 from math import degrees, radians, cos, pi, sin
 import moveit_commander
 import moveit_msgs.msg
-from std_msgs.msg import Bool
 from math import cos, pi, sin
 from std_msgs.msg import String
 from moveit_commander.conversions import pose_to_list
@@ -22,7 +21,7 @@ import geometry_msgs.msg
 from copy import deepcopy
 
 
-rospy.init_node("placeIMU", anonymous=True)
+rospy.init_node("pickIMU", anonymous=True)
 group_name = "manipulator"
 pose_goal = Pose()
 moveit_commander.roscpp_initialize(sys.argv)
@@ -33,14 +32,13 @@ display_trajectory_publisher = rospy.Publisher(
     '/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
 
 
-# # arucoID = 10
-# IMU_Module = [0.19091, 0.26106, -0.08999,-0.00543, -0.0, 0.70793, 0.70793]
-# # arucoID = 11
-Panel = [0.41428, 0.346645, 0.51533,-0.56227, 0.40892, 0.42225, -0.58168]
+IMU_Module = rospy.get_param('tag10')[0]  # -0.707, 0.707, 0, 0 xyzw
+Panel = rospy.get_param("tag11")[0]
 
-IMU_orientation = 60#float(rospy.get_param('angle'))
-#Panel = rospy.get_param("tag11")[0]
-
+# arucoID = 10
+##IMU_Module = [0.19091, 0.26106, -0.08999,-0.00543, -0.0, 0.70793, 0.70793]
+# arucoID = 11
+#Panel = [0.41428, 0.346645, 0.51533,-0.56227, 0.40892, 0.42225, -0.58168]
 
 def euler_to_quaternion(roll, pitch, yaw):
 
@@ -54,6 +52,7 @@ def euler_to_quaternion(roll, pitch, yaw):
         np.sin(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
 
     return [qx, qy, qz, qw]
+
 def quaternion_to_euler(x, y, z, w):
 
     t0 = +2.0 * (w * x + y * z)
@@ -72,94 +71,84 @@ def quaternion_to_euler(x, y, z, w):
     return radians(X), radians(Y), radians(Z)
 
 
-def PlaceImu(Panel, move_group):
+
+def PickImu(IMU_Module,move_group):
     
-    gripperPos("semi_open")
-    rospy.sleep(2)
-    
-    aboveStorage = [radians(7), radians(-97), radians(81),
-                    radians(15), radians(64), radians(-90)]
-    move_group.go(aboveStorage)
-
-    waypoints = []
-    end = move_group.get_end_effector_link()
-    wpose = move_group.get_current_pose(end).pose
-
-    eular = quaternion_to_euler(Panel[3], Panel[4], Panel[5], Panel[6])
-    eular = list(eular)
-    print(degrees(eular[0]), degrees(eular[1]), degrees(eular[2]))
-    eular[0] = pi/2
-    eular[1] = pi/2
-    eular[2] = eular[2] + pi
-    print(degrees(eular[0]), degrees(eular[1]), degrees(eular[2]))
-    qua = euler_to_quaternion(eular[0], eular[1], eular[2])
-    print(qua)
-
-    wpose.position.x = Panel[0]-0.08520
-    wpose.position.y = Panel[1]-0.09954
-    wpose.position.z = Panel[2]-0.15
-    wpose.orientation.x = qua[0]
-    wpose.orientation.y = qua[1]
-    wpose.orientation.z = qua[2]
-    wpose.orientation.w = qua[3]
-    waypoints.append(copy.deepcopy(wpose))
-    (plan, fraction) = move_group.compute_cartesian_path(
-        waypoints, 0.01, 0.0, True)
-    move_group.execute(plan, wait=True)
-    print("")
-    print("Reached near IMU panel")
-
-    waypoints = []
-    end = move_group.get_end_effector_link()
-    wpose = move_group.get_current_pose(end).pose
-
-    eular = quaternion_to_euler(Panel[3], Panel[4], Panel[5], Panel[6])
-    eular = list(eular)
-    print(degrees(eular[0]), degrees(eular[1]), degrees(eular[2]))
-    eular[0] = pi/2
-    eular[1] = radians(IMU_orientation)
-    eular[2] = eular[2] + pi
-    print(degrees(eular[0]), degrees(eular[1]), degrees(eular[2]))
-    qua = euler_to_quaternion(eular[0], eular[1], eular[2])
-    print(qua)
-
-    wpose.orientation.x = qua[0]
-    wpose.orientation.y = qua[1]
-    wpose.orientation.z = qua[2]
-    wpose.orientation.w = qua[3]
-    waypoints.append(copy.deepcopy(wpose))
-    (plan, fraction) = move_group.compute_cartesian_path(
-        waypoints, 0.01, 0.0, True)
-    move_group.execute(plan, wait=True)
-    print("")
-    print("Taken IMU orientation")
-
-    waypoints = []
-    end = move_group.get_end_effector_link()
-    wpose = move_group.get_current_pose(end).pose
-    wpose.position.x += Panel[0] + 0.056 - 0.01332 -0.43
-    wpose.position.y += Panel[1] - 0.042 - 0.00433 -0.3
-    waypoints.append(copy.deepcopy(wpose))
-    print(wpose)
-    (plan, fraction) = move_group.compute_cartesian_path(
-        waypoints, 0.01, 0.0, True)
-    move_group.execute(plan)
-    
-    wpose = move_group.get_current_pose().pose
-    print(wpose)
     gripperPos("open")
-    rospy.sleep(2)
+    rospy.sleep(1)
+    
+    # move the arm to the home position
+    group_variables = move_group.get_current_joint_values()
+    group_variables[0] = 0
+    group_variables[1] = -2.094395
+    group_variables[2] = 1.745329
+    group_variables[3] = 0.349065
+    group_variables[4] = 1.570796
+    group_variables[5] = -1.570796
+    move_group.set_joint_value_target(group_variables)
+    plan = move_group.go(wait=True)
 
+    aboveIMU = [radians(35), radians(-81), radians(114),
+                    radians(-123), radians(-91), radians(35)]
+    move_group.go(aboveIMU)
+
+    waypoints = []
+    end = move_group.get_end_effector_link()
+    wpose = move_group.get_current_pose(end).pose
+
+    eular = quaternion_to_euler(IMU_Module[3], IMU_Module[4], IMU_Module[5], IMU_Module[6])
+    eular = list(eular)
+    eular[0] = 0
+    eular[1] = pi
+    #eular[2] = 
+
+    qua = euler_to_quaternion(eular[0], eular[1], eular[2])
+    print(qua)
+
+    wpose.position.x = IMU_Module[0]
+    wpose.position.y = IMU_Module[1] 
+    wpose.position.z = 0 
+    
+    wpose.orientation.x = qua[0]
+    wpose.orientation.y = qua[1]
+    wpose.orientation.z = qua[2]
+    wpose.orientation.w = qua[3]
+
+    waypoints.append(copy.deepcopy(wpose))
+    (plan, fraction) = move_group.compute_cartesian_path(
+        waypoints, 0.01, 0.0, True)
+    move_group.execute(plan, wait=True)
+    
+    waypoints = []
+    end = move_group.get_end_effector_link()
+    wpose = move_group.get_current_pose(end).pose
+    
+    wpose.position.z = IMU_Module[2] + 0.044 
+    
+    waypoints.append(copy.deepcopy(wpose))
+    (plan, fraction) = move_group.compute_cartesian_path(
+        waypoints, 0.01, 0.0, True)
+    move_group.execute(plan, wait=True)
+    
+   
     print("")
-    print("********IMU Placeed********")
+    print("Reached IMU Potition")
+    
+
+    gripperPos("semi_open")
+    rospy.sleep(1)
+    
+    waypoints = []
+    end = move_group.get_end_effector_link()
+    wpose = move_group.get_current_pose(end).pose
+    
+    wpose.position.z = 0.1 
+    
+    waypoints.append(copy.deepcopy(wpose))
+    (plan, fraction) = move_group.compute_cartesian_path(
+        waypoints, 0.01, 0.0, True)
+    move_group.execute(plan, wait=True)
     print("")
+    print("Picked up IMU")
 
-    # try:
-    #     service_proxy = rospy.ServiceProxy('erc_score', Bool)
-    #     service_response = service_proxy(True)
-    # except rospy.ServiceException as e:
-    #     print(f"Service call failed: {e}")
-    move_group.go([0, -(pi/2), 0, -(pi/2), 0, 0])
-
-
-PlaceImu(Panel, move_group)
+PickImu(IMU_Module,move_group)
