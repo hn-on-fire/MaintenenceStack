@@ -26,7 +26,7 @@ moveit_commander.roscpp_initialize(sys.argv)
 move_group = moveit_commander.MoveGroupCommander(group_name)
 robot = moveit_commander.RobotCommander()
 display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
-lid_Store_position = rospy.getParam('lidStorage')
+lid_Store_position = rospy.get_param('lidStorage')
 # arucoID = 12
 move_group.go([0,-(pi/2), 0, -(pi/2), 0, 0])
 Inspec_panel = rospy.get_param('tag12')#[0.33565261545991887, -0.2745230369010141, 0.2059755184403631]

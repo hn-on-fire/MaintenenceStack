@@ -9,3 +9,7 @@ def gripperPos(str):
     time.sleep(.5)
     pub.publish(String(str))
     time.sleep(.5)
+    pub.publish(String(str))
+    time.sleep(.5)
+    pub.publish(String(str))
+    time.sleep(.5)
