@@ -21,7 +21,7 @@ import time
 from gripperControl import *
 
 
-rospy.init_node("InspectionPanel", anonymous=True)
+#rospy.init_node("InspectionPanel", anonymous=True)
 group_name = "manipulator"
 pose_goal = Pose()
 moveit_commander.roscpp_initialize(sys.argv)
@@ -102,7 +102,7 @@ def PickLid(box,move_group):
     wpose = move_group.get_current_pose(end).pose
     # print(wpose)
 
-    eular = quaternion_to_euler(box[3], box[4], box[5], box[6])
+    eular = quaternion_to_euler(box[1][0], box[1][1], box[1][2], box[1][3])
     eular = list(eular)
     eular[0] = eular[0] + radians(90)
     eular[1] = 0.4
@@ -111,9 +111,9 @@ def PickLid(box,move_group):
     qua = euler_to_quaternion(eular[0], eular[1], eular[2])
     print(qua)
 
-    wpose.position.x = box[0] + 0.01
-    wpose.position.y = box[1] - 0.0032
-    wpose.position.z = box[2] + 0.125
+    wpose.position.x = box[0][0] + 0.01
+    wpose.position.y = box[0][1] - 0.0032
+    wpose.position.z = box[0][2] + 0.125
     wpose.orientation.x = qua[0]
     wpose.orientation.y = qua[1]
     wpose.orientation.z = qua[2]
@@ -187,7 +187,7 @@ def GoToScan(box,move_group):
     # print(wpose)
 
     waypoints = []
-    wpose.position.z = box[2] + 0.125
+    wpose.position.z = box[0][2] + 0.125
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
@@ -195,8 +195,8 @@ def GoToScan(box,move_group):
     move_group.execute(plan, wait=True)
 
     waypoints = []
-    wpose.position.x = box[0] + 0.005
-    wpose.position.y = box[1] - 0.0032
+    wpose.position.x = box[0][0] + 0.005
+    wpose.position.y = box[0][1] - 0.0032
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
@@ -206,7 +206,7 @@ def GoToScan(box,move_group):
     print("")
 
 
-def GoToLid(lid_positionm,move_group):
+def GoToLid(lid_position,move_group):
 
     move_group.go(lid_position)
     print("Reached Lid Storage Position")
@@ -214,12 +214,12 @@ def GoToLid(lid_positionm,move_group):
 
 
 
-def PlaceLid(box, lid_position,move_group):
+def PlaceLid(lid_position,move_group):
 
     waypoints = []
 
     wpose = move_group.get_current_pose().pose
-    wpose.position.z = lid_position[2] + 0.02
+    wpose.position.z = lid_position[0][2] + 0.02
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
@@ -229,8 +229,8 @@ def PlaceLid(box, lid_position,move_group):
 
     waypoints = []
     wpose = move_group.get_current_pose().pose
-    wpose.position.x = lid_position[0]
-    wpose.position.y = lid_position[1]
+    wpose.position.x = lid_position[0][0]
+    wpose.position.y = lid_position[0][1]
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
@@ -240,7 +240,7 @@ def PlaceLid(box, lid_position,move_group):
     waypoints = []
     wpose = move_group.get_current_pose().pose
 
-    wpose.position.z = lid_position[2]
+    wpose.position.z = lid_position[0][2]
 
     waypoints.append(copy.deepcopy(wpose))
     (plan, fraction) = move_group.compute_cartesian_path(
