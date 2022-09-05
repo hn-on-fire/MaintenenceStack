@@ -32,8 +32,8 @@ display_trajectory_publisher = rospy.Publisher(
     '/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
 
 
-IMU_Module = rospy.get_param('tag10')[0]  # -0.707, 0.707, 0, 0 xyzw
-Panel = rospy.get_param("tag11")[0]
+IMU_Module = rospy.get_param('tag10') # -0.707, 0.707, 0, 0 xyzw
+Panel = rospy.get_param("tag11")
 
 # arucoID = 10
 ##IMU_Module = [0.19091, 0.26106, -0.08999,-0.00543, -0.0, 0.70793, 0.70793]
@@ -96,7 +96,7 @@ def PickImu(IMU_Module,move_group):
     end = move_group.get_end_effector_link()
     wpose = move_group.get_current_pose(end).pose
 
-    eular = quaternion_to_euler(IMU_Module[3], IMU_Module[4], IMU_Module[5], IMU_Module[6])
+    eular = quaternion_to_euler(IMU_Module[1][0], IMU_Module[1][1], IMU_Module[1][2], IMU_Module[1][3])
     eular = list(eular)
     eular[0] = 0
     eular[1] = pi
@@ -105,8 +105,8 @@ def PickImu(IMU_Module,move_group):
     qua = euler_to_quaternion(eular[0], eular[1], eular[2])
     print(qua)
 
-    wpose.position.x = IMU_Module[0]
-    wpose.position.y = IMU_Module[1] 
+    wpose.position.x = IMU_Module[0][0]
+    wpose.position.y = IMU_Module[0][1] 
     wpose.position.z = 0 
     
     wpose.orientation.x = qua[0]
